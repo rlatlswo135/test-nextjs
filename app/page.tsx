@@ -1,7 +1,7 @@
 // app/page.tsx
+import { SearchBar } from "@/components/search-bar";
 
 async function getPosts() {
-  // Fetch data directly in the component. No useEffect. No useState.
   const res = await fetch(
     "https://jsonplaceholder.typicode.com/posts?_limit=5",
   );
@@ -9,11 +9,15 @@ async function getPosts() {
 }
 
 export default async function HomePage() {
-  const posts = await getPosts(); // await directly in the component
+  const posts = await getPosts();
 
   return (
     <main className="max-w-2xl mx-auto p-8">
       <h1 className="text-3xl font-bold mb-6">My Blog</h1>
+
+      {/* Client Component inside a Server Component. This works perfectly. */}
+      <SearchBar />
+
       <ul className="space-y-4">
         {posts.map((post: { id: number; title: string; body: string }) => (
           <li key={post.id} className="border rounded-lg p-4">
