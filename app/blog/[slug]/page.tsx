@@ -1,5 +1,3 @@
-// app/blog/[slug]/page.tsx
-import { Metadata } from "next/dist/lib/metadata/types/metadata-interface";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -7,22 +5,6 @@ async function getPost(id: string) {
   const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`);
   if (!res.ok) return null;
   return res.json();
-}
-
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}): Promise<Metadata> {
-  const { slug } = await params;
-  const post = await fetch(
-    `https://jsonplaceholder.typicode.com/posts/${slug}`,
-  ).then((r) => r.json());
-
-  return {
-    title: post.title,
-    description: post.body.slice(0, 160),
-  };
 }
 
 export default async function PostPage({
@@ -34,7 +16,7 @@ export default async function PostPage({
   const post = await getPost(slug);
 
   if (!post) {
-    notFound(); // renders your not-found.tsx, or a default 404 page
+    notFound(); // renders your not-found.tsx, or a  default 404 page
   }
 
   return (

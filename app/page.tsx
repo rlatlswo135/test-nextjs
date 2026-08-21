@@ -1,4 +1,5 @@
-// app/page.tsx
+"use cache";
+
 import { SearchBar } from "@/components/search-bar";
 import { PostList } from "@/components/post-list";
 
